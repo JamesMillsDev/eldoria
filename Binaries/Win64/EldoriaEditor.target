@@ -1242,6 +1242,10 @@
 			"Type": "DynamicLibrary"
 		},
 		{
+			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-RewindDebuggerInterface.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
 			"Path": "$(EngineDir)/Binaries/Win64/UnrealEditor-S3Client.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -1814,6 +1818,18 @@
 			"Type": "RequiredResource"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Animation/BlendStack/Binaries/Win64/UnrealEditor-BlendStack.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/BlendStack/Binaries/Win64/UnrealEditor-BlendStackEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/BlendStack/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Animation/ControlRigSpline/Binaries/Win64/UnrealEditor-ControlRigSpline.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -1838,6 +1854,26 @@
 			"Type": "RequiredResource"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Animation/GameplayInsights/Binaries/Win64/UnrealEditor-GameplayInsights.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/GameplayInsights/Binaries/Win64/UnrealEditor-GameplayInsightsEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/GameplayInsights/Binaries/Win64/UnrealEditor-RewindDebugger.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/GameplayInsights/Binaries/Win64/UnrealEditor-RewindDebuggerVLog.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/GameplayInsights/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Animation/IKRig/Binaries/Win64/UnrealEditor-IKRig.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -1851,6 +1887,18 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Animation/IKRig/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/PoseSearch/Binaries/Win64/UnrealEditor-PoseSearch.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/PoseSearch/Binaries/Win64/UnrealEditor-PoseSearchEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/PoseSearch/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -2311,6 +2359,14 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Enterprise/VariantManager/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/Animation/MotionTrajectory/Binaries/Win64/UnrealEditor-MotionTrajectory.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/Animation/MotionTrajectory/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
 		{
@@ -24608,6 +24664,10 @@
 			"Type": "UFS"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Animation/BlendStack/BlendStack.uplugin",
+			"Type": "UFS"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Animation/ControlRigModules/ControlRigModules.uplugin",
 			"Type": "UFS"
 		},
@@ -24620,7 +24680,15 @@
 			"Type": "UFS"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Animation/GameplayInsights/GameplayInsights.uplugin",
+			"Type": "UFS"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Animation/IKRig/IKRig.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Animation/PoseSearch/PoseSearch.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -24821,6 +24889,10 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Enterprise/VariantManager/VariantManager.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Experimental/Animation/MotionTrajectory/MotionTrajectory.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -25153,6 +25225,7 @@
 		"BackChannel",
 		"BaseCharacterFXEditor",
 		"BlendSpaceMotionAnalysis",
+		"BlendStack",
 		"BlueprintHeaderView",
 		"Bridge",
 		"CableComponent",
@@ -25190,6 +25263,7 @@
 		"Fracture",
 		"FullBodyIK",
 		"GameplayCameras",
+		"GameplayInsights",
 		"GameplayTagsEditor",
 		"GeometryCache",
 		"GeometryCollectionPlugin",
@@ -25219,6 +25293,7 @@
 		"Metasound",
 		"MobileLauncherProfileWizard",
 		"ModelingToolsEditorMode",
+		"MotionTrajectory",
 		"MsQuic",
 		"N10XSourceCodeAccess",
 		"Niagara",
@@ -25237,6 +25312,7 @@
 		"PluginBrowser",
 		"PluginUtils",
 		"PortableObjectFileDataSource",
+		"PoseSearch",
 		"ProceduralMeshComponent",
 		"PropertyAccessEditor",
 		"PropertyAccessNode",
