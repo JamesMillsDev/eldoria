@@ -3,6 +3,8 @@
 
 #include "EldoriaPlayerCharacter.h"
 
+#include "EldoriaPlayerController.h"
+#include "EnhancedInputComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
@@ -32,4 +34,12 @@ AEldoriaPlayerCharacter::AEldoriaPlayerCharacter()
 void AEldoriaPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if(UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		if(AEldoriaPlayerController* PlayerController = Cast<AEldoriaPlayerController>(Controller))
+		{
+			PlayerController->ConfigureInputComponent(EnhancedInput);
+		}
+	}
 }
