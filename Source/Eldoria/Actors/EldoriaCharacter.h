@@ -14,7 +14,14 @@ class ELDORIA_API AEldoriaCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
+	FORCEINLINE class UCharacterSheetComponent* GetCharacterSheet() const { return CharacterSheet; }
+
+public:
 	// Sets default values for this character's properties
 	AEldoriaCharacter();
+
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
+	class UCharacterSheetComponent* CharacterSheet;
 
 };

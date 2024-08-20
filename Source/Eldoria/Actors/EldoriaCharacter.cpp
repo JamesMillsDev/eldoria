@@ -4,6 +4,8 @@
 #include "EldoriaCharacter.h"
 
 #include "Components/CapsuleComponent.h"
+#include "Components/ActorComponents/CharacterSheetComponent.h"
+
 #include "GameFramework/CharacterMovementComponent.h"
 
 DEFINE_LOG_CATEGORY(LogEldoriaCharacter);
@@ -48,4 +50,42 @@ AEldoriaCharacter::AEldoriaCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	CharacterSheet = CreateDefaultSubobject<UCharacterSheetComponent>(TEXT("CharacterSheet"));
+
+	CharacterSheet->AddAttribute(
+		UCharacterSheetComponent::MakeAttribute(
+			"Strength", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
+		)
+	);
+
+	CharacterSheet->AddAttribute(
+		UCharacterSheetComponent::MakeAttribute(
+			"Dexterity", false, static_cast<int32>(EAttributeCapabilities::SavingThrow | EAttributeCapabilities::ArmourClass | EAttributeCapabilities::Initiative)
+		)
+	);
+
+	CharacterSheet->AddAttribute(
+		UCharacterSheetComponent::MakeAttribute(
+			"Constitution", false, static_cast<int32>(EAttributeCapabilities::SavingThrow | EAttributeCapabilities::HitPoints)
+		)
+	);
+
+	CharacterSheet->AddAttribute(
+		UCharacterSheetComponent::MakeAttribute(
+			"Intelligence", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
+		)
+	);
+
+	CharacterSheet->AddAttribute(
+		UCharacterSheetComponent::MakeAttribute(
+			"Wisdom", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
+		)
+	);
+
+	CharacterSheet->AddAttribute(
+		UCharacterSheetComponent::MakeAttribute(
+			"Charisma", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
+		)
+	);
 }

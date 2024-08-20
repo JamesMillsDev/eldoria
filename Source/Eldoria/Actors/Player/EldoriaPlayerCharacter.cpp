@@ -6,6 +6,9 @@
 #include "EldoriaPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "Camera/CameraComponent.h"
+
+#include "Eldoria/Actors/Components/ActorComponents/PlayerCharacterSheetComponent.h"
+
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
