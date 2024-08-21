@@ -3,6 +3,8 @@
 
 #include "CharacterSheetComponent.h"
 
+#include "Eldoria/Libraries/StatsFunctionLibrary.h"
+
 FCharacterAttribute::FCharacterAttribute()
 {
 	ID = "None";
@@ -42,6 +44,8 @@ UCharacterSheetComponent::UCharacterSheetComponent()
 
 	Level = 1;
 	HitDice = EDiceType::D8;
+	MaxHitPoints = 0;
+	CurrentHitPoints = 0;
 }
 
 FCharacterAttribute UCharacterSheetComponent::MakeAttribute(FName ID, bool bIsProficient, int32 Capabilities)
@@ -102,4 +106,20 @@ void UCharacterSheetComponent::FindAttributesWithCapability(int32 Capability, TA
 			CapableAttributes.Add(Attr);
 		}
 	}
+}
+
+void UCharacterSheetComponent::SetHitPoints()
+{
+	MaxHitPoints = UStatsFunctionLibrary::CalculateHitPoints(this);
+	CurrentHitPoints = MaxHitPoints;
+}
+
+int32 UCharacterSheetComponent::GetMaxHitPoints() const
+{
+	return MaxHitPoints;
+}
+
+int32 UCharacterSheetComponent::GetCurrentHitPoints() const
+{
+	return CurrentHitPoints;
 }

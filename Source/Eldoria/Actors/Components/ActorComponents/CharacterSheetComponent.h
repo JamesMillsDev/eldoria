@@ -44,6 +44,8 @@ class ELDORIA_API UCharacterSheetComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+	friend struct FCharacterSheetSaveData;
+
 public:
 	// Sets default values for this component's properties
 	UCharacterSheetComponent();
@@ -71,6 +73,15 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats")
 	void FindAttributesWithCapability(UPARAM(meta = (Bitmask, BitmaskEnum = EAttributeCapabilities)) int32 Capability, TArray<FCharacterAttribute>& CapableAttributes, bool& bFound);
 
+	UFUNCTION(BlueprintCallable, Category = "Eldoria|Character|Stats")
+	void SetHitPoints();
+
+	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", DisplayName = "Max Hit Points", meta = (CompactNodeTitle = "Max Hit Points"))
+	int32 GetMaxHitPoints() const;
+
+	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", DisplayName = "Current Hit Points", meta = (CompactNodeTitle = "Current Hit Points"))
+	int32 GetCurrentHitPoints() const;
+
 private:
 	UPROPERTY(EditDefaultsOnly, meta = (TitleProperty = "ID"))
 	TArray<FCharacterAttribute> Attributes;
@@ -80,5 +91,11 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	EDiceType HitDice;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 MaxHitPoints;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 CurrentHitPoints;
 
 };

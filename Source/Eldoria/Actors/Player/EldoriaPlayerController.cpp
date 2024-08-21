@@ -4,8 +4,15 @@
 #include "EldoriaPlayerController.h"
 
 #include "EnhancedInputComponent.h"
+
+#include "Eldoria/Actors/EldoriaCharacter.h"
 #include "Eldoria/Data/EldoriaInputConfig.h"
+#include "Eldoria/Data/EldoriaSaveGame.h"
+#include "Eldoria/Framework/EldoriaGameInstance.h"
+
 #include "GameFramework/Character.h"
+
+#include "Kismet/GameplayStatics.h"
 
 void AEldoriaPlayerController::ConfigureInputComponent(UEnhancedInputComponent* EnhancedInput)
 {
@@ -43,6 +50,39 @@ void AEldoriaPlayerController::BeginPlay()
 	{
 		InputConfig->BindMappingContext(this);
 	}
+}
+
+void AEldoriaPlayerController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+
+	if(UEldoriaGameInstance* GameInstance = Cast<UEldoriaGameInstance>(UGameplayStatics::GetGameInstance(GetWorld())))
+	{
+		if (AEldoriaCharacter* EldoriaCharacter = Cast<AEldoriaCharacter>(InPawn))
+		{
+			if (GameInstance->bDidLoad)
+			{
+				GameInstance->Save->Load(EldoriaCharacter->GetCharacterSheet());
+			}
+			else
+			{
+				EldoriaCharacter->GetCharacterSheet()->SetHitPoints();
+			}
+		}
+	}
+}
+
+void AEldoriaPlayerController::OnUnPossess()
+{
+	if (UEldoriaGameInstance* GameInstance = Cast<UEldoriaGameInstance>(UGameplayStatics::GetGameInstance(GetWorld())))
+	{
+		if (AEldoriaCharacter* EldoriaCharacter = Cast<AEldoriaCharacter>(GetCharacter()))
+		{
+			GameInstance->Save->Save(EldoriaCharacter->GetCharacterSheet());
+		}
+	}
+
+	Super::OnUnPossess();
 }
 
 // ReSharper disable CppMemberFunctionMayBeConst
