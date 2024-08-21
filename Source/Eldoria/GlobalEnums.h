@@ -4,9 +4,6 @@
 
 #include "CoreMinimal.h"
 
-/**
- *
- */
 UENUM(BlueprintType)
 enum class EEldoriaInputID : uint8
 {
@@ -20,10 +17,7 @@ enum class EEldoriaInputID : uint8
 	Sprint
 };
 
-/**
- *
- */
-UENUM(BlueprintType, Flags)
+UENUM(BlueprintType, Flags, meta = (UseEnumValuesAsMaskValuesInEditor = true))
 enum class EAttributeCapabilities : uint8
 {
 	None,
@@ -34,19 +28,16 @@ enum class EAttributeCapabilities : uint8
 };
 ENUM_CLASS_FLAGS(EAttributeCapabilities)
 
-/**
- *
- */
 UENUM(BlueprintType)
 enum class EDiceType : uint8
 {
 	None UMETA(DisplayName = "Invalid"),
-	D2 UMETA(DisplayName = "Coin Flip"),
-	D4 UMETA(DisplayName = "d4"),
-	D6 UMETA(DisplayName = "d6"),
-	D8 UMETA(DisplayName = "d8"),
-	D10 UMETA(DisplayName = "d10"),
-	D12 UMETA(DisplayName = "d12"),
-	D20 UMETA(DisplayName = "d20"),
-	D100 UMETA(DisplayName = "d100")
+	D2 = 2 UMETA(DisplayName = "Coin Flip"),
+	D4 = 4 UMETA(DisplayName = "d4"),
+	D6 = 6 UMETA(DisplayName = "d6"),
+	D8 = 8 UMETA(DisplayName = "d8"),
+	D10 = 10 UMETA(DisplayName = "d10"),
+	D12 = 12 UMETA(DisplayName = "d12"),
+	D20 = 20 UMETA(DisplayName = "d20"),
+	D100 = 100 UMETA(DisplayName = "d100")
 };

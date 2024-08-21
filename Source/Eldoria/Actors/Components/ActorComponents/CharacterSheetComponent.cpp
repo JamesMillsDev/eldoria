@@ -48,17 +48,37 @@ FCharacterAttribute UCharacterSheetComponent::MakeAttribute(FName ID, bool bIsPr
 {
 	FCharacterAttribute Attribute = FCharacterAttribute(ID);
 
-	Attribute.AttributeCapabilities = Capabilities | static_cast<int32>(EAttributeCapabilities::None);
+	Attribute.AttributeCapabilities = Capabilities;
 	Attribute.bIsProficient = bIsProficient;
 
 	return Attribute;
 }
 
+int32 UCharacterSheetComponent::GetLevel() const
+{
+	return Level;
+}
+
+EDiceType UCharacterSheetComponent::GetHitDice() const
+{
+	return HitDice;
+}
+
+TArray<FCharacterAttribute> UCharacterSheetComponent::GetCharacterAttributes()
+{
+	return Attributes;
+}
+
+void UCharacterSheetComponent::AddAttribute(const FCharacterAttribute Attribute)
+{
+	Attributes.AddUnique(Attribute);
+}
+
 void UCharacterSheetComponent::FindAttribute(FName ID, FCharacterAttribute& Attribute, bool& bFound)
 {
-	for(auto& Attr : Attributes)
+	for (auto& Attr : Attributes)
 	{
-		if(Attr.ID == ID)
+		if (Attr.ID == ID)
 		{
 			bFound = true;
 			Attribute = Attr;
@@ -69,12 +89,17 @@ void UCharacterSheetComponent::FindAttribute(FName ID, FCharacterAttribute& Attr
 	bFound = false;
 }
 
-int32 UCharacterSheetComponent::GetLevel() const
+void UCharacterSheetComponent::FindAttributesWithCapability(int32 Capability, TArray<FCharacterAttribute>& CapableAttributes,
+	bool& bFound)
 {
-	return Level;
-}
+	bFound = false;
 
-void UCharacterSheetComponent::AddAttribute(const FCharacterAttribute Attribute)
-{
-	Attributes.AddUnique(Attribute);
+	for (auto& Attr : Attributes)
+	{
+		if ((Attr.AttributeCapabilities & Capability) == Capability)
+		{
+			bFound = true;
+			CapableAttributes.Add(Attr);
+		}
+	}
 }

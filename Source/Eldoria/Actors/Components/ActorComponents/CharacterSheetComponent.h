@@ -22,7 +22,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Bitmask, BitmaskEnum = EAttributeCapabilities))
 	int32 AttributeCapabilities;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (UIMin = "1", UIMax = "30", ClampMin = "1", ClampMax = "30"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (UIMin = "1", UIMax = "20", ClampMin = "1", ClampMax = "20"))
 	int32 Value;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (EditCondition = "bIsProficient", EditConditionHides))
@@ -53,23 +53,32 @@ public:
 	static FCharacterAttribute MakeAttribute(FName ID, bool bIsProficient, UPARAM(meta = (Bitmask, BitmaskEnum = EAttributeCapabilities))int32 Capabilities);
 
 public:
-	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", meta = (CompactNodeTitle = "Attribute"))
-	void FindAttribute(FName ID, FCharacterAttribute& Attribute, bool& bFound);
-
 	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", DisplayName = "Level", meta = (CompactNodeTitle = "Level"))
 	int32 GetLevel() const;
+
+	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", DisplayName = "Hit Die", meta = (CompactNodeTitle = "Hit Die"))
+	EDiceType GetHitDice() const;
+
+	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", DisplayName = "Character Attributes", meta = (CompactNodeTitle = "Character Attributes"))
+	TArray<FCharacterAttribute> GetCharacterAttributes();
 
 	UFUNCTION(BlueprintCallable, Category = "Eldoria|Character|Stats")
 	void AddAttribute(FCharacterAttribute Attribute);
 
+	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", meta = (CompactNodeTitle = "Attribute"))
+	void FindAttribute(FName ID, FCharacterAttribute& Attribute, bool& bFound);
+
+	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats")
+	void FindAttributesWithCapability(UPARAM(meta = (Bitmask, BitmaskEnum = EAttributeCapabilities)) int32 Capability, TArray<FCharacterAttribute>& CapableAttributes, bool& bFound);
+
 private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true, TitleProperty = "ID"))
+	UPROPERTY(EditDefaultsOnly, meta = (TitleProperty = "ID"))
 	TArray<FCharacterAttribute> Attributes;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true, ClampMin = "1", ClampMax = "30", UIMin = "1", UIMax = "30"))
+	UPROPERTY(EditAnywhere, meta = (ClampMin = "1", ClampMax = "20", UIMin = "1", UIMax = "20"))
 	int32 Level;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	UPROPERTY(EditDefaultsOnly)
 	EDiceType HitDice;
 
 };
