@@ -9,6 +9,11 @@
 
 #include "Kismet/GameplayStatics.h"
 
+UEldoriaGameInstance::UEldoriaGameInstance()
+{
+	MaxLevel = 20;
+}
+
 void UEldoriaGameInstance::Init()
 {
 	Super::Init();

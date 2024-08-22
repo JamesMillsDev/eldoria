@@ -88,4 +88,15 @@ AEldoriaCharacter::AEldoriaCharacter()
 			"Charisma", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
 		)
 	);
+
+	OnTakeAnyDamage.AddUniqueDynamic(this, &AEldoriaCharacter::OnTakeDamage);
+}
+
+void AEldoriaCharacter::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
+	AController* InstigatedBy, AActor* DamageCauser)
+{
+	if(IsValid(CharacterSheet))
+	{
+		CharacterSheet->ApplyDamage(static_cast<int32>(Damage), DamageType);
+	}
 }

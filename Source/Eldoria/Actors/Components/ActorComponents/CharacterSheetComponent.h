@@ -82,6 +82,12 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Eldoria|Character|Stats", DisplayName = "Current Hit Points", meta = (CompactNodeTitle = "Current Hit Points"))
 	int32 GetCurrentHitPoints() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Eldoria|Character|Stats")
+	void LevelUp();
+
+	UFUNCTION(BlueprintCallable, Category = "Eldoria|Character|Stats")
+	void ApplyDamage(int32 Amount, const UDamageType* Damage);
+
 private:
 	UPROPERTY(EditDefaultsOnly, meta = (TitleProperty = "ID"))
 	TArray<FCharacterAttribute> Attributes;

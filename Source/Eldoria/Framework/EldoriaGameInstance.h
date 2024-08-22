@@ -21,6 +21,12 @@ public:
 	UPROPERTY()
 	bool bDidLoad;
 
+	UPROPERTY(EditDefaultsOnly)
+	int32 MaxLevel;
+
+public:
+	UEldoriaGameInstance();
+
 public:
 	virtual void Init() override;
 	virtual void Shutdown() override;

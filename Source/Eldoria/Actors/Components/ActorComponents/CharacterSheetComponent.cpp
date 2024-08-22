@@ -3,7 +3,10 @@
 
 #include "CharacterSheetComponent.h"
 
+#include "Eldoria/Framework/EldoriaGameInstance.h"
 #include "Eldoria/Libraries/StatsFunctionLibrary.h"
+
+#include "Kismet/GameplayStatics.h"
 
 FCharacterAttribute::FCharacterAttribute()
 {
@@ -122,4 +125,44 @@ int32 UCharacterSheetComponent::GetMaxHitPoints() const
 int32 UCharacterSheetComponent::GetCurrentHitPoints() const
 {
 	return CurrentHitPoints;
+}
+
+void UCharacterSheetComponent::LevelUp()
+{
+	if (UEldoriaGameInstance* GameInstance = Cast<UEldoriaGameInstance>(UGameplayStatics::GetGameInstance(GetWorld())))
+	{
+		if (Level + 1 <= GameInstance->MaxLevel)
+		{
+			Level++;
+
+			int32 IncreaseAmount = 0;
+
+			TArray<FCharacterAttribute> CapableAttributes;
+			bool bFound = false;
+			FindAttributesWithCapability(static_cast<int32>(EAttributeCapabilities::HitPoints), CapableAttributes, bFound);
+
+			if (bFound)
+			{
+				for (const auto& Attribute : CapableAttributes)
+				{
+					IncreaseAmount += UStatsFunctionLibrary::CalculateModifier(Attribute.Value);
+				}
+			}
+
+			IncreaseAmount += FMath::RandRange(1, UStatsFunctionLibrary::DiceTypeValue(HitDice));
+
+			MaxHitPoints += IncreaseAmount;
+			CurrentHitPoints += IncreaseAmount;
+		}
+	}
+}
+
+void UCharacterSheetComponent::ApplyDamage(int32 Amount, const UDamageType* Damage)
+{
+	CurrentHitPoints -= Amount;
+
+	if(CurrentHitPoints < 0)
+	{
+		CurrentHitPoints = 0;
+	}
 }
