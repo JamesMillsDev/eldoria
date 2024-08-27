@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class ELDORIA_API AEldoriaPlayerCharacter : public AEldoriaCharacter
 {
 	GENERATED_BODY()

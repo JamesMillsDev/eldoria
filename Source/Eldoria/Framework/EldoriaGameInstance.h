@@ -6,6 +6,8 @@
 #include "Engine/GameInstance.h"
 #include "EldoriaGameInstance.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSaveLoad, class UEldoriaSaveGame*&, Save, bool, bIsSaving);
+
 /**
  * 
  */
@@ -21,8 +23,11 @@ public:
 	UPROPERTY()
 	bool bDidLoad;
 
-	UPROPERTY(EditDefaultsOnly)
-	int32 MaxLevel;
+	UPROPERTY(BlueprintAssignable)
+	FOnSaveLoad OnSaveLoad;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	class UGlobalGameConfig* GlobalConfig;
 
 public:
 	UEldoriaGameInstance();

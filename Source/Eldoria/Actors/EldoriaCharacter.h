@@ -8,7 +8,7 @@
 
 DECLARE_LOG_CATEGORY_EXTERN(LogEldoriaCharacter, Log, All);
 
-UCLASS()
+UCLASS(NotBlueprintable, Abstract)
 class ELDORIA_API AEldoriaCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -20,12 +20,17 @@ public:
 	// Sets default values for this character's properties
 	AEldoriaCharacter();
 
-private:
+protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = true))
 	class UCharacterSheetComponent* CharacterSheet;
+
+protected:
+	UFUNCTION()
+	void MakeDefaultAttributes();
 
 private:
 	UFUNCTION()
 	void OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+
 
 };
