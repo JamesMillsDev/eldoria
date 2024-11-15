@@ -11,7 +11,7 @@
 
 UEldoriaGameInstance::UEldoriaGameInstance()
 {
-	MaxLevel = 20;
+
 }
 
 void UEldoriaGameInstance::Init()
@@ -33,10 +33,14 @@ void UEldoriaGameInstance::Init()
 	}
 
 	Save = Cast<UEldoriaSaveGame>(Loaded);
+
+	OnSaveLoad.Broadcast(Save, false);
 }
 
 void UEldoriaGameInstance::Shutdown()
 {
+	OnSaveLoad.Broadcast(Save, true);
+
 	UGameplayStatics::SaveGameToSlot(Save, TEXT("Singleplayer"), 0);
 
 	Super::Shutdown();

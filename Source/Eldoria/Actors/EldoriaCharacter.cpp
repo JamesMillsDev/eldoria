@@ -52,7 +52,13 @@ AEldoriaCharacter::AEldoriaCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	CharacterSheet = CreateDefaultSubobject<UCharacterSheetComponent>(TEXT("CharacterSheet"));
+	MakeDefaultAttributes();
 
+	OnTakeAnyDamage.AddUniqueDynamic(this, &AEldoriaCharacter::OnTakeDamage);
+}
+
+void AEldoriaCharacter::MakeDefaultAttributes()
+{
 	CharacterSheet->AddAttribute(
 		UCharacterSheetComponent::MakeAttribute(
 			"Strength", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
@@ -88,12 +94,10 @@ AEldoriaCharacter::AEldoriaCharacter()
 			"Charisma", false, static_cast<int32>(EAttributeCapabilities::SavingThrow)
 		)
 	);
-
-	OnTakeAnyDamage.AddUniqueDynamic(this, &AEldoriaCharacter::OnTakeDamage);
 }
 
 void AEldoriaCharacter::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
-	AController* InstigatedBy, AActor* DamageCauser)
+                                     AController* InstigatedBy, AActor* DamageCauser)
 {
 	if(IsValid(CharacterSheet))
 	{

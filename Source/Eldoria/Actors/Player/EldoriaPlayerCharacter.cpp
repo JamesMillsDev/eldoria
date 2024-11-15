@@ -32,6 +32,12 @@ AEldoriaPlayerCharacter::AEldoriaPlayerCharacter()
 
 		MovementProperties.bCanCrouch = true;
 	}
+
+	CharacterSheet->DestroyComponent();
+
+	CharacterSheet = CreateDefaultSubobject<UPlayerCharacterSheetComponent>(TEXT("PlayerCharacterSheet"));
+
+	MakeDefaultAttributes();
 }
 
 void AEldoriaPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

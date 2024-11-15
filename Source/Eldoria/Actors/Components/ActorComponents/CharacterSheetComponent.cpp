@@ -3,6 +3,7 @@
 
 #include "CharacterSheetComponent.h"
 
+#include "Eldoria/Data/GlobalGameConfig.h"
 #include "Eldoria/Framework/EldoriaGameInstance.h"
 #include "Eldoria/Libraries/StatsFunctionLibrary.h"
 
@@ -131,7 +132,7 @@ void UCharacterSheetComponent::LevelUp()
 {
 	if (UEldoriaGameInstance* GameInstance = Cast<UEldoriaGameInstance>(UGameplayStatics::GetGameInstance(GetWorld())))
 	{
-		if (Level + 1 <= GameInstance->MaxLevel)
+		if (Level + 1 <= GameInstance->GlobalConfig->MaxLevel)
 		{
 			Level++;
 
@@ -161,7 +162,7 @@ void UCharacterSheetComponent::ApplyDamage(int32 Amount, const UDamageType* Dama
 {
 	CurrentHitPoints -= Amount;
 
-	if(CurrentHitPoints < 0)
+	if (CurrentHitPoints < 0)
 	{
 		CurrentHitPoints = 0;
 	}

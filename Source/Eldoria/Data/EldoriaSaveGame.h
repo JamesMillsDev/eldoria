@@ -19,6 +19,9 @@ public:
 	UPROPERTY()
 	FCharacterSheetSaveData CharacterSave;
 
+	UPROPERTY()
+	int32 PlayerCharacterExperience;
+
 public:
 	void Save(class UCharacterSheetComponent* Character);
 	void Load(class UCharacterSheetComponent* Character);
